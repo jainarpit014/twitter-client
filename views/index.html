@@ -43,11 +43,11 @@
 		        <i class="fa fa-2x fa-twitter"></i>
 		      </a>
 		    </div>
-		    <form class="navbar-form navbar-right" role="search" method="post" action="/query">
+		    <form class="navbar-form navbar-right" role="search" method="post" ng-controller="SearchController as sc">
 				<div class="input-group">
-			      <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+			      <input type="text" class="form-control" placeholder="Search" name="search" id="search" ng-model="sc.query">
 			      <span class="input-group-btn">
-			        <button class="btn btn-primary" type="submit"><i class="fa fa-lg fa-search"></i></button>
+			        <button class="btn btn-primary" type="button" ng-click="sc.search()"><i class="fa fa-lg fa-search"></i></button>
 			      </span>
 		    	</div>
 			</form>

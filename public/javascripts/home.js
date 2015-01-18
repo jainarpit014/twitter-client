@@ -1,74 +1,86 @@
 (function(){
     var home = angular.module('home',[]);
 
-    /*app.service('GetData',['$http',function($http){
+	home.controller('SearchController',["$http","$rootScope",function($http,$rootScope){
+		var q = this;
+		q.query = "";
+		q.search = function(){
+			$rootScope.$broadcast('LoadUserData',q.query);		
+		}
+	}]);
 
-
-
-
-    }]);*/
-
-    home.controller('TimelineController',["$http",function($http){
+    home.controller('TimelineController',["$http","$scope",function($http,$scope){
 
     	var d = this;
     	d.tweets = [];
+    	d.query = "";
 
-
-		$http.get('/user_timeline').
+		$scope.$on('LoadUserData',function(event,args){
+			d.query = args;
+			$http.post('/user_timeline',{q:d.query}).
 			success(function(data,status,headers,config){
 				d.tweets = data;
 			}).
 			error(function(data,status,headers,config){
 
 			});
+		});
+		
     }]);
-    home.controller('HomelineController',["$http",function($http){
+    home.controller('HomelineController',["$http","$scope",function($http,$scope){
 
     	var d = this;
     	d.tweets = [];
 
-
-		$http.get('/user_home_timeline').
+		$scope.$on('LoadUserData',function(event,args){
+			d.query = args;
+			$http.post('/user_home_timeline',{q:d.query}).
 			success(function(data,status,headers,config){
 				d.tweets = data;
 			}).
 			error(function(data,status,headers,config){
 
 			});
+		});
     }]);
-    home.controller('FavoritesController',["$http",function($http){
+    home.controller('FavoritesController',["$http","$scope",function($http,$scope){
 
     	var d = this;
     	d.tweets = [];
 
 
-		$http.get('/favorites').
+		$scope.$on('LoadUserData',function(event,args){
+			d.query = args;
+			$http.post('/favorites',{q:d.query}).
 			success(function(data,status,headers,config){
 				d.tweets = data;
 			}).
 			error(function(data,status,headers,config){
 
 			});
+		});
     }]);
-    home.controller('FollowersController',["$http",function($http){
+    home.controller('FollowersController',["$http","$scope",function($http,$scope){
 
     	var d = this;
     	d.followers = [];
 
 
-		$http.get('/followers').
+		$scope.$on('LoadUserData',function(event,args){
+			d.query = args;
+			$http.post('/followers',{q:d.query}).
 			success(function(data,status,headers,config){
 				d.followers = data;
 			}).
 			error(function(data,status,headers,config){
 
 			});
+		});
     }]);
     home.controller('TrendsController',["$http",function($http){
 
     	var d = this;
     	d.trends = [];
-
 
 		$http.get('/trends').
 			success(function(data,status,headers,config){
@@ -78,18 +90,19 @@
 
 			});
     }]);
-    home.controller('FriendsController',["$http",function($http){
+    home.controller('FriendsController',["$http","$scope",function($http,$scope){
 
     	var d = this;
     	d.friends = [];
-
-
-		$http.get('/friends').
+		$scope.$on('LoadUserData',function(event,args){
+			d.query = args;
+			$http.post('/friends',{q:d.query}).
 			success(function(data,status,headers,config){
 				d.friends = data;
 			}).
 			error(function(data,status,headers,config){
 
 			});
+		});
     }]);
 })();
