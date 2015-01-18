@@ -1,0 +1,165 @@
+<!doctype html>
+<html ng-app="home">
+	<head>
+		<title>Twitter</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.js"></script>
+		<script src="/javascripts/home.js"></script>
+		<style type="text/css">
+			body{
+				background-color: #01203D;
+			}
+			.navbar-default{
+				background-color: #55ACEE;
+				border-color: #55ACEE;
+			}
+			.navbar-brand{
+				padding: 6px 15px;
+			}
+			.panel-default>.panel-heading {
+				color: white;
+				background-color: #01203D;
+				border-color: #01203D;
+			}
+			.panel-body
+			{
+				background-color: #01203D
+			}
+			a{
+				text-decoration: none;
+			}
+			i{
+				color: white;
+			}
+
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+		  <div class="container">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="#">
+		        <i class="fa fa-2x fa-twitter"></i>
+		      </a>
+		    </div>
+		    <form class="navbar-form navbar-right" role="search" method="post" action="/query">
+				<div class="input-group">
+			      <input type="text" class="form-control" placeholder="Search" name="search" id="search">
+			      <span class="input-group-btn">
+			        <button class="btn btn-primary" type="submit"><i class="fa fa-lg fa-search"></i></button>
+			      </span>
+		    	</div>
+			</form>
+		  </div>
+		</nav>
+		<br>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-default" ng-controller="TimelineController as tlc">
+						<div class="panel-heading"><i class="fa fa-bars fa-lg"></i>&nbsp;TIMELINE</div>
+						<div class="panel-body">
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="(key,tweet) in tlc.tweets">
+									<div class="row">
+										<div class="col-md-2">
+											<img ng-src="{{tweet.profile_image}}" class="img-circle">
+										</div>
+										<div class="col-md-10">
+											<label>{{tweet.name}} <a ng-href="https://twitter.com/@{{tweet.screen_name}}">@{{tweet.screen_name}}</a></label><br>
+											<span>{{tweet.text}}</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default" ng-controller="HomelineController as hlc">
+						<div class="panel-heading"><i class="fa fa-home fa-lg"></i>&nbsp;HOME</div>
+						<div class="panel-body">
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="(key,tweet) in hlc.tweets">
+									<div class="row">
+										<div class="col-md-2">
+											<img ng-src="{{tweet.profile_image}}" class="img-circle">
+										</div>
+										<div class="col-md-10">
+											<label>{{tweet.name}} <a ng-href="https://twitter.com/@{{tweet.screen_name}}">@{{tweet.screen_name}}</a></label><br>
+											<span>{{tweet.text}}</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default" ng-controller="FavoritesController as favc">
+						<div class="panel-heading"><i class="fa fa-star fa-lg"></i>&nbsp;FAVORITES</div>
+						<div class="panel-body">
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="(key,tweet) in favc.tweets">
+									<div class="row">
+										<div class="col-md-2">
+											<img ng-src="{{tweet.profile_image}}" class="img-circle">
+										</div>
+										<div class="col-md-10">
+											<label>{{tweet.name}} <a ng-href="https://twitter.com/@{{tweet.screen_name}}">@{{tweet.screen_name}}</a></label><br>
+											<span>{{tweet.text}}</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-default" ng-controller="FollowersController as flc">
+						<div class="panel-heading"><i class="fa fa-mail-reply-all fa-lg"></i>&nbsp;FOLLOWERS</div>
+						<div class="panel-body">
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="(key,follower) in flc.followers">
+									<img ng-src="{{follower.profile_image}}" class="img-circle">
+									{{follower.name}}
+									<a ng-href="https://twitter.com/@{{follower.screen_name}}">@{{follower.screen_name}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default" ng-controller="FriendsController as fc">
+						<div class="panel-heading"><i class="fa fa-share fa-lg"></i>&nbsp;FOLLOWING</div>
+						<div class="panel-body">
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="(key,friend) in fc.friends">
+									<img ng-src="{{friend.profile_image}}" class="img-circle">
+									{{friend.name}}
+									<a ng-href="https://twitter.com/@{{friend.screen_name}}">@{{friend.screen_name}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default" ng-controller="TrendsController as tc">
+						<div class="panel-heading"><i class="fa fa-bolt fa-lg"></i>&nbsp;TRENDING</div>
+						<div class="panel-body">
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="(key,trend) in tc.trends">
+									<a ng-href="{{trend.url}}">{{trend.name}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
