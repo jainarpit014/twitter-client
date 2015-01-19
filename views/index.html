@@ -46,9 +46,9 @@
 		    <form class="navbar-form navbar-right" role="search" method="post" ng-controller="SearchController as sc">
 		    <em>Search with any user screen name &nbsp;<i class="fa fa-long-arrow-right" style="color:black"></i></em>
 				<div class="input-group">
-			      <input type="text" class="form-control" placeholder="" name="search" id="search" ng-model="sc.query">
+			      <input type="text" class="form-control" placeholder="e.g. slywala" name="search" id="search" ng-model="sc.query">
 			      <span class="input-group-btn">
-			        <button class="btn btn-primary" type="button" ng-click="sc.search()"><i class="fa fa-lg fa-search"></i></button>
+			        <button class="btn btn-primary" type="submit" ng-click="sc.search()"><i class="fa fa-lg fa-search"></i></button>
 			      </span>
 		    	</div>
 			</form>
@@ -63,26 +63,6 @@
 						<div class="panel-body">
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="(key,tweet) in tlc.tweets">
-									<div class="row">
-										<div class="col-md-2">
-											<img ng-src="{{tweet.profile_image}}" class="img-circle">
-										</div>
-										<div class="col-md-10">
-											<label>{{tweet.name}} <a ng-href="https://twitter.com/@{{tweet.screen_name}}">@{{tweet.screen_name}}</a></label><br>
-											<span>{{tweet.text}}</span>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="panel panel-default" ng-controller="HomelineController as hlc">
-						<div class="panel-heading"><i class="fa fa-home fa-lg"></i>&nbsp;HOME</div>
-						<div class="panel-body">
-							<ul class="list-group">
-								<li class="list-group-item" ng-repeat="(key,tweet) in hlc.tweets">
 									<div class="row">
 										<div class="col-md-2">
 											<img ng-src="{{tweet.profile_image}}" class="img-circle">
@@ -117,6 +97,18 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-4">
+					<div class="panel panel-default" ng-controller="TrendsController as tc">
+						<div class="panel-heading"><i class="fa fa-bolt fa-lg"></i>&nbsp;TRENDING IN INDIA</div>
+						<div class="panel-body">
+							<ul class="list-group">
+								<li class="list-group-item" ng-repeat="(key,trend) in tc.trends">
+									<a ng-href="{{trend.url}}">{{trend.name}}</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-4">
@@ -142,18 +134,6 @@
 									<img ng-src="{{friend.profile_image}}" class="img-circle">
 									{{friend.name}}
 									<a ng-href="https://twitter.com/@{{friend.screen_name}}">@{{friend.screen_name}}</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="panel panel-default" ng-controller="TrendsController as tc">
-						<div class="panel-heading"><i class="fa fa-bolt fa-lg"></i>&nbsp;TRENDING IN INDIA</div>
-						<div class="panel-body">
-							<ul class="list-group">
-								<li class="list-group-item" ng-repeat="(key,trend) in tc.trends">
-									<a ng-href="{{trend.url}}">{{trend.name}}</a>
 								</li>
 							</ul>
 						</div>

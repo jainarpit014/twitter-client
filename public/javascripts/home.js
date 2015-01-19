@@ -27,22 +27,6 @@
 		});
 		
     }]);
-    home.controller('HomelineController',["$http","$scope",function($http,$scope){
-
-    	var d = this;
-    	d.tweets = [];
-
-		$scope.$on('LoadUserData',function(event,args){
-			d.query = args;
-			$http.get('/user_home_timeline?q='+d.query).
-			success(function(data,status,headers,config){
-				d.tweets = data;
-			}).
-			error(function(data,status,headers,config){
-
-			});
-		});
-    }]);
     home.controller('FavoritesController',["$http","$scope",function($http,$scope){
 
     	var d = this;
