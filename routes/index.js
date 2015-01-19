@@ -44,7 +44,7 @@ router.get('/user_timeline',function(req,res){
 /*Get user homeline*/
 router.get('/user_home_timeline',function(req,res){
 	var data = [];
-	console.log(req.body.q);
+	
 	client.get('/statuses/home_timeline',{screen_name:req.query.q},function(err,payload){
   		
   		async.forEach(payload,function(tweet,callback){
@@ -67,7 +67,7 @@ router.get('/trends',function(req,res){
 });
 /*Get user favorited tweets*/
 router.get('/favorites',function(req,res){
-	console.log(req.body.q);
+	
 	client.get('/favorites/list',{screen_name:req.query.q},function(err,payload){
 		var data = [];
 			async.forEach(payload,function(tweet,callback){
@@ -83,7 +83,7 @@ router.get('/favorites',function(req,res){
 });
 /*Get user followers*/
 router.get('/followers',function(req,res){
-	console.log(req.body.q);
+	
 	client.get('/followers/list',{screen_name:req.query.q},function(err,payload){
 		var data = [];
 			async.forEach(payload['users'],function(follower,callback){
@@ -99,7 +99,7 @@ router.get('/followers',function(req,res){
 });
 /*List of users which specified user is following*/
 router.get('/friends',function(req,res){
-	console.log(req.body.q);
+	
 	client.get('/friends/list',{screen_name:req.query.q},function(err,payload){
 		
 		var data = [];
