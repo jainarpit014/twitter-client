@@ -59,8 +59,9 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="panel panel-default" ng-controller="TimelineController as tlc">
-						<div class="panel-heading"><i class="fa fa-bars fa-lg"></i>&nbsp;TIMELINE</div>
+						<div class="panel-heading"><i class="fa fa-bars fa-lg"></i>&nbsp;TIMELINE<i class="fa fa-refresh fa-spin col-md-offset-8" id="timeline-loader" ng-show="tlc.loader"></i></div>
 						<div class="panel-body">
+						<label class="label-danger label" ng-show="tlc.err">Either username is incorrect or user is private</label>
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="(key,tweet) in tlc.tweets">
 									<div class="row">
@@ -79,7 +80,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="panel panel-default" ng-controller="FavoritesController as favc">
-						<div class="panel-heading"><i class="fa fa-star fa-lg"></i>&nbsp;FAVORITES</div>
+						<div class="panel-heading"><i class="fa fa-star fa-lg"></i>&nbsp;FAVORITES<i class="fa fa-refresh fa-spin col-md-offset-7" id="favourites-loader" ng-show="favc.loader"></i></div>
 						<div class="panel-body">
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="(key,tweet) in favc.tweets">
@@ -113,7 +114,7 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="panel panel-default" ng-controller="FollowersController as flc">
-						<div class="panel-heading"><i class="fa fa-mail-reply-all fa-lg"></i>&nbsp;FOLLOWERS</div>
+						<div class="panel-heading"><i class="fa fa-mail-reply-all fa-lg"></i>&nbsp;FOLLOWERS<i class="fa fa-refresh fa-spin col-md-offset-7" id="followers-loader" ng-show="flc.loader"></i></div>
 						<div class="panel-body">
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="(key,follower) in flc.followers">
@@ -127,7 +128,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="panel panel-default" ng-controller="FriendsController as fc">
-						<div class="panel-heading"><i class="fa fa-share fa-lg"></i>&nbsp;FOLLOWING</div>
+						<div class="panel-heading"><i class="fa fa-share fa-lg"></i>&nbsp;FOLLOWING<i class="fa fa-refresh fa-spin col-md-offset-7" id="following-loader" ng-show="fc.loader"></i></div>
 						<div class="panel-body">
 							<ul class="list-group">
 								<li class="list-group-item" ng-repeat="(key,friend) in fc.friends">
