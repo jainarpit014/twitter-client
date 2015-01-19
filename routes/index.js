@@ -8,10 +8,10 @@ var Twitter = require("twitter");
 
 
 var client = new Twitter({
-	consumer_key: 'yo8cc7EZ4ce0xMNvm4h8HJGKF',
-	consumer_secret: 'qPopQcprNfpzJx6vMIVbBkNadjp10h65NGiVAftx0HxSnVuxDu',
-	access_token_key: '86736865-MrC9qKKY8ZhjvzXZi3hpkmRUGIOwC9xBakSz3ib3U',
-	access_token_secret: 'I0wmGZy2xd8kpya50cd9wqrhY6XIHMWhfYjb73zuNChCP'
+	consumer_key: 'YOUR CONSUMER KEY',
+	consumer_secret: 'YOUR CONSUMER SECRET KEY',
+	access_token_key: 'YOUR ACCESS TOKEN KEY',
+	access_token_secret: 'YOUR ACCESS TOKEN SECRET'
 });
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -24,10 +24,10 @@ router.get('/search',function(req,res){
 	});
 });
 /*Get user timeline*/
-router.post('/user_timeline',function(req,res){
+router.get('/user_timeline',function(req,res){
 	var data = [];
-	console.log(req.body.q);
-	client.get('/statuses/user_timeline',{user_id:req.body.q},function(err,payload){
+
+	client.get('/statuses/user_timeline',{screen_name:req.query.q},function(err,payload){
   		
   		async.forEach(payload,function(tweet,callback){
 
@@ -42,10 +42,10 @@ router.post('/user_timeline',function(req,res){
 	});
 });
 /*Get user homeline*/
-router.post('/user_home_timeline',function(req,res){
+router.get('/user_home_timeline',function(req,res){
 	var data = [];
 	console.log(req.body.q);
-	client.get('/statuses/home_timeline',{user_id:req.body.q},function(err,payload){
+	client.get('/statuses/home_timeline',{screen_name:req.query.q},function(err,payload){
   		
   		async.forEach(payload,function(tweet,callback){
 			data.push({text:tweet['text'],name:tweet['user']['name'],screen_name:tweet['user']['screen_name'],profile_image:tweet['user']['profile_image_url']});callback();
@@ -66,9 +66,9 @@ router.get('/trends',function(req,res){
 	});
 });
 /*Get user favorited tweets*/
-router.post('/favorites',function(req,res){
+router.get('/favorites',function(req,res){
 	console.log(req.body.q);
-	client.get('/favorites/list',{user_id:req.body.q},function(err,payload){
+	client.get('/favorites/list',{screen_name:req.query.q},function(err,payload){
 		var data = [];
 			async.forEach(payload,function(tweet,callback){
 			data.push({text:tweet['text'],name:tweet['user']['name'],screen_name:tweet['user']['screen_name'],profile_image:tweet['user']['profile_image_url']});callback();
@@ -82,9 +82,9 @@ router.post('/favorites',function(req,res){
 	});
 });
 /*Get user followers*/
-router.post('/followers',function(req,res){
+router.get('/followers',function(req,res){
 	console.log(req.body.q);
-	client.get('/followers/list',{user_id:req.body.q},function(err,payload){
+	client.get('/followers/list',{screen_name:req.query.q},function(err,payload){
 		var data = [];
 			async.forEach(payload['users'],function(follower,callback){
 				data.push({name:follower['name'],screen_name:follower['screen_name'],profile_image:follower['profile_image_url']});callback();
@@ -98,9 +98,9 @@ router.post('/followers',function(req,res){
 	});
 });
 /*List of users which specified user is following*/
-router.post('/friends',function(req,res){
+router.get('/friends',function(req,res){
 	console.log(req.body.q);
-	client.get('/friends/list',{user_id:req.body.q},function(err,payload){
+	client.get('/friends/list',{screen_name:req.query.q},function(err,payload){
 		
 		var data = [];
 			async.forEach(payload['users'],function(friend,callback){

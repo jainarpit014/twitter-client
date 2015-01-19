@@ -17,7 +17,7 @@
 
 		$scope.$on('LoadUserData',function(event,args){
 			d.query = args;
-			$http.post('/user_timeline',{q:d.query}).
+			$http.get('/user_timeline?q='+d.query).
 			success(function(data,status,headers,config){
 				d.tweets = data;
 			}).
@@ -34,7 +34,7 @@
 
 		$scope.$on('LoadUserData',function(event,args){
 			d.query = args;
-			$http.post('/user_home_timeline',{q:d.query}).
+			$http.get('/user_home_timeline?q='+d.query).
 			success(function(data,status,headers,config){
 				d.tweets = data;
 			}).
@@ -51,7 +51,7 @@
 
 		$scope.$on('LoadUserData',function(event,args){
 			d.query = args;
-			$http.post('/favorites',{q:d.query}).
+			$http.get('/favorites?q='+d.query).
 			success(function(data,status,headers,config){
 				d.tweets = data;
 			}).
@@ -68,7 +68,7 @@
 
 		$scope.$on('LoadUserData',function(event,args){
 			d.query = args;
-			$http.post('/followers',{q:d.query}).
+			$http.get('/followers?q='+d.query).
 			success(function(data,status,headers,config){
 				d.followers = data;
 			}).
@@ -96,7 +96,7 @@
     	d.friends = [];
 		$scope.$on('LoadUserData',function(event,args){
 			d.query = args;
-			$http.post('/friends',{q:d.query}).
+			$http.get('/friends?q='+d.query).
 			success(function(data,status,headers,config){
 				d.friends = data;
 			}).
